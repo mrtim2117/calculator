@@ -1,0 +1,29 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "Simple Integer Calculator",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon listen.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrtim2117/calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrtim2117/calculator/issues"
+  },
+  "homepage": "https://github.com/mrtim2117/calculator#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jest": "^27.4.4",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
+  }
+}
