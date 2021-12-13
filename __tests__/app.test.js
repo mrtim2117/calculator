@@ -26,7 +26,7 @@ describe("GET /api", () => {
       .get("/api")
       .expect(200)
       .then((res) => {
-        expect(Object.keys(res.body.endpoints).length).toBe(1);
+        expect(Object.keys(res.body.endpoints).length).toBe(5);
       });
   });
 });

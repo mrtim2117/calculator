@@ -1,5 +1,33 @@
 {
   "GET /api": {
     "description": "serves up a json representation of all the available endpoints for this api"
+  },
+  "GET /api/add": {
+    "description": "adds two numbers together",
+    "queries": ["addendOne, addendTwo"],
+    "exampleResponse": {
+      "sum": 4
+    }
+  },
+  "GET /api/subtract": {
+    "description": "subtracts subtrahend from minuend",
+    "queries": ["subtrahend, minuend"],
+    "exampleResponse": {
+      "difference": 7
+    }
+  },
+  "GET /api/multiply": {
+    "description": "multiplies multiplicand by multiplier",
+    "queries": ["multiplicand, multiplier"],
+    "exampleResponse": {
+      "product": 27
+    }
+  },
+  "GET /api/divide": {
+    "description": "divides dividend by divisor",
+    "queries": ["dividend, divisor"],
+    "exampleResponse": {
+      "product": 27
+    }
   }
 }
