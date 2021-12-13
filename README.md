@@ -105,8 +105,8 @@ The following assumptions were made during the development of this project:
 - `No authentication to the api is required`
 - `A production build is still required, where the following concerns require consideration`
   - `instrumentation is added to the code and logging implemented`
-  - `process hosting decision eg containerisation, Azure serverless function etc`
-  - `requirements for implementation of authentication are required`
+  - `process hosting decision eg containerisation, Azure serverless functions etc`
+  - `any requirements for implementation of authentication are considered`
   - `scalability approach is required, based on intended usage volumes`
   - `availability or up-time is considered`
   - `real-time monitoring of the application`
