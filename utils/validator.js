@@ -31,4 +31,4 @@ const hasCommas = (op) => {
   return op.includes(",");
 };
 
-module.exports = parseOperandsAsynch;
+module.exports = { parseOperandsAsynch, isDecimal, hasCommas };

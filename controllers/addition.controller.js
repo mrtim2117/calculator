@@ -1,5 +1,5 @@
 const { sumTwoNumbersAsynch } = require("../utils/arithmetic");
-const parseOperandsAsynch = require("../utils/validator");
+const { parseOperandsAsynch } = require("../utils/validator");
 
 const getSum = (req, res, next) => {
   const { addendOne, addendTwo } = req.query;

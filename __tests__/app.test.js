@@ -102,7 +102,6 @@ describe("GET add", () => {
       .expect(400)
       .then((res) => {
         expect(res.body.msg).toBe("unrecognised input");
-        console.log(res.body.msg);
       });
   });
   test("fails with both operands missing", () => {
@@ -117,17 +116,13 @@ describe("GET add", () => {
     return request(app)
       .get("/api/add?addendOne=7&addendTwo=14,000")
       .expect(400)
-      .then((res) => {
-        console.log("Test: ", res.body.msg);
-      });
+      .then((res) => {});
   });
   test("unable to work with multiple commas", () => {
     return request(app)
       .get("/api/add?addendOne=7,000,000&addendTwo=16")
       .expect(400)
-      .then((res) => {
-        console.log("Test: ", res.body.msg);
-      });
+      .then((res) => {});
   });
   test("returns the sum of two larger integers", () => {
     return request(app)
@@ -325,7 +320,6 @@ describe("GET divide", () => {
       .expect(400)
       .then((res) => {
         expect(res.body.msg).toBe("attempt to divide by zero");
-        console.log("Test: ", res.body);
       });
   });
   test("handles missing operands", () => {

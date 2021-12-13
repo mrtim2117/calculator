@@ -1,5 +1,5 @@
 const { multiplyTwoNumbersAsynch } = require("../utils/arithmetic");
-const parseOperandsAsynch = require("../utils/validator");
+const { parseOperandsAsynch } = require("../utils/validator");
 
 const getProduct = (req, res, next) => {
   const { multiplicand, multiplier } = req.query;

@@ -1,5 +1,5 @@
 const { divideDividendByDivisorAsynch } = require("../utils/arithmetic");
-const parseOperandsAsynch = require("../utils/validator");
+const { parseOperandsAsynch } = require("../utils/validator");
 
 const getQuotient = (req, res, next) => {
   const { dividend, divisor } = req.query;

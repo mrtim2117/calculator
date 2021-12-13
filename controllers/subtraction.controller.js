@@ -1,5 +1,5 @@
 const { subtractAFromBAsynch } = require("../utils/arithmetic");
-const parseOperandsAsynch = require("../utils/validator");
+const { parseOperandsAsynch } = require("../utils/validator");
 
 const getDifference = (req, res, next) => {
   const { subtrahend, minuend } = req.query;
