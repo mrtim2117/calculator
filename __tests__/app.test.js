@@ -171,9 +171,30 @@ describe("GET subtract", () => {
         expect(res.body.msg).toBe("invalid input");
       });
   });
-  // larger numbers
-  // missing operands
-  // ignores more than 2 operands
+  test("happy with large subtrahend", () => {
+    return request(app)
+      .get("/api/subtract?subtrahend=10000000&minuend=9")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.difference).toBe(-9999991);
+      });
+  });
+  test("any operands after the first two are ignored", () => {
+    return request(app)
+      .get("/api/subtract?subtrahend=5&minuend=9&something=5")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.difference).toBe(4);
+      });
+  });
+  test("fails with one missing operand", () => {
+    return request(app)
+      .get("/api/subtract?subtrahend=10000000")
+      .expect(400)
+      .then((res) => {
+        expect(res.body.msg).toBe("unrecognised input");
+      });
+  });
 });
 describe("GET multiply", () => {
   test("multiplies two numbers to give the product", () => {
@@ -184,8 +205,30 @@ describe("GET multiply", () => {
         expect(res.body.product).toBe(40);
       });
   });
-
-  // Same as for subtract tests
+  test("multiplies two larger numbers to give the product", () => {
+    return request(app)
+      .get("/api/multiply?multiplicand=100000&multiplier=1000000")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.product).toBe(100000000000);
+      });
+  });
+  test("fails with one missing operand", () => {
+    return request(app)
+      .get("/api/multiply?multiplicand=100")
+      .expect(400)
+      .then((res) => {
+        expect(res.body.msg).toBe("unrecognised input");
+      });
+  });
+  test("ignores additional operands beyond the first two", () => {
+    return request(app)
+      .get("/api/multiply?multiplicand=5&multiplier=10&something=30")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.product).toBe(50);
+      });
+  });
 });
 describe("GET divide", () => {
   test("divides dividend by divisor", () => {
@@ -194,17 +237,111 @@ describe("GET divide", () => {
       .expect(200)
       .then((res) => {
         expect(res.body.quotient).toBe(4);
-        console.log("Test: ", res.body);
       });
   });
-  test("divides dividend by divisor, returning decimal", () => {
+  test("divides dividend by divisor, returning integer element of quotient alone", () => {
     return request(app)
       .get("/api/divide?dividend=9&divisor=2")
       .expect(200)
       .then((res) => {
-        // expect(res.body.quotient).toBe(4);
+        expect(res.body.quotient).toBe(4);
+      });
+  });
+  test("gives zero when quotient less than but close to 1", () => {
+    return request(app)
+      .get("/api/divide?dividend=9&divisor=10")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(0);
+      });
+  });
+  test("gives zero when quotient less than but close to 0.5", () => {
+    return request(app)
+      .get("/api/divide?dividend=49&divisor=100")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(0);
+      });
+  });
+  test("gives zero when quotient close to 0", () => {
+    return request(app)
+      .get("/api/divide?dividend=1&divisor=100")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(0);
+      });
+  });
+  test("0 divided by a number is 0", () => {
+    return request(app)
+      .get("/api/divide?dividend=0&divisor=3")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(0);
+      });
+  });
+  test("negative divident gives negative quotient", () => {
+    return request(app)
+      .get("/api/divide?dividend=-10&divisor=5")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(-2);
+      });
+  });
+  test("negative divisor gives negative quotient", () => {
+    return request(app)
+      .get("/api/divide?dividend=10&divisor=-4")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(-2);
+      });
+  });
+  test("negative divisor and negative divident gives positive quotient", () => {
+    return request(app)
+      .get("/api/divide?dividend=-30&divisor=-3")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(10);
+      });
+  });
+  test("handles larger inputs", () => {
+    return request(app)
+      .get("/api/divide?dividend=50000000&divisor=10000000")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(5);
+      });
+  });
+  test("handles larger answers", () => {
+    return request(app)
+      .get("/api/divide?dividend=5000000000&divisor=2")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(2500000000);
+      });
+  });
+  test("handles divide by zero gracefully", () => {
+    return request(app)
+      .get("/api/divide?dividend=42&divisor=0")
+      .expect(400)
+      .then((res) => {
+        expect(res.body.msg).toBe("attempt to divide by zero");
         console.log("Test: ", res.body);
       });
   });
+  test("handles missing operands", () => {
+    return request(app)
+      .get("/api/divide?divisor=2")
+      .expect(400)
+      .then((res) => {
+        expect(res.body.msg).toBe("unrecognised input");
+      });
+  });
+  test("additional operands beyond the first two are ignored", () => {
+    return request(app)
+      .get("/api/divide?dividend=10&divisor=2&something=37")
+      .expect(200)
+      .then((res) => {
+        expect(res.body.quotient).toBe(5);
+      });
+  });
 });
-// console.log("Test: ", res.body);

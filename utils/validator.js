@@ -11,7 +11,6 @@ const parseOperandsAsynch = (op1, op2) => {
         const arg1 = parseInt(op1);
         const arg2 = parseInt(op2);
 
-        console.log("Validator: ", arg1, arg2);
         if (!Number.isInteger(arg1) || !Number.isInteger(arg2)) {
           reject({ status: 400, msg: "invalid input" });
         } else {

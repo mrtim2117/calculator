@@ -43,7 +43,11 @@ const subtractAFromB = (subtrahend, minuend) => {
 const divideDividendByDivisorAsynch = (dividend, divisor) => {
   const diviPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(divideDividendByDivisor(dividend, divisor));
+      if (divisor === 0) {
+        reject({ status: 400, msg: "attempt to divide by zero" });
+      } else {
+        resolve(divideDividendByDivisor(dividend, divisor));
+      }
     }, 0);
   });
 
@@ -51,7 +55,8 @@ const divideDividendByDivisorAsynch = (dividend, divisor) => {
 };
 
 const divideDividendByDivisor = (dividend, divisor) => {
-  return dividend / divisor;
+  // Remember that we're asked to perform integer arithmetic here!
+  return Math.trunc(dividend / divisor);
 };
 
 module.exports = {
