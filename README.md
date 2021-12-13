@@ -104,8 +104,16 @@ The following assumptions were made during the development of this project:
 - `It's acceptable to omit logging from this initial build`
 - `No authentication to the api is required`
 - `A production build is still required, where the following concerns require consideration`
-  -- `instrumentation is added to the code and logging implemented`
-  -- `process hosting decision eg containerisation, Azure serverless function etc`
+  - `instrumentation is added to the code and logging implemented`
+  - `process hosting decision eg containerisation, Azure serverless function etc`
+  - `requirements for implementation of authentication are required`
+  - `scalability approach is required, based on intended usage volumes`
+  - `availability or up-time is considered`
+  - `real-time monitoring of the application`
+  - `crash automatic re-start `
+  - `Static code analysis`
+  - `Penetration testing`
+  - `Overriding the default port setting`
 
 ## Step 6 - Limitations
 
